@@ -220,8 +220,6 @@ variational:
     ninner: '10'
     gradient norm reduction: 1e-10
     test: 'on'
-    diagnostics:
-      departures: ombg
   - geometry:
       nml_file: "./Data/480km/namelist.atmosphere_2018041500"
       streams_file: "./Data/480km/streams.atmosphere"
@@ -229,8 +227,6 @@ variational:
     gradient norm reduction: 1e-10
     test: 'on'
 final:
-  diagnostics:
-    departures: oman
   increment: # total increment
     geometry:
       nml_file: "./Data/480km/namelist.atmosphere_2018041500"

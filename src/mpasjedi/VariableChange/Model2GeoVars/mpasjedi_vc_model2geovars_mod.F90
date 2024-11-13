@@ -449,22 +449,10 @@ subroutine changevar(self, geom, xm, xg)
 
         case ( var_z ) !-geopotential_height, geopotential heights at midpoint
           ! calculate midpoint geometricZ (unit: m):
-          do iCell = 1, nCells
-            lat = geom%latCell(iCell) * MPAS_JEDI_RAD2DEG_kr !- to Degrees
-            do iLevel = 1, nVertLevels
-               call geometric2geop(real(lat,kind=kind_real), real(geom%height(iLevel,iCell),kind=kind_real), rz)
-               gdata%r2%array(iLevel,iCell)=rz
-            enddo
-          enddo
+          gdata%r2%array(:,1:nCells)=geom%height(:,1:nCells)
 
         case ( var_zi ) !-geopotential_height_levels, geopotential heights at w levels
-          do iCell = 1, nCells
-            lat = geom%latCell(iCell) * MPAS_JEDI_RAD2DEG_kr !- to Degrees
-            do iLevel = 1, nVertLevelsP1
-               call geometric2geop(real(lat,kind=kind_real), real(geom%zgrid(iLevel,iCell),kind=kind_real), rz)
-               gdata%r2%array(iLevel,iCell)=rz
-            enddo
-          enddo
+          gdata%r2%array(:,1:nCells)=geom%zgrid(:,1:nCells)
 
         case ( var_geomz, var_zm ) !-height
           ! calculate midpoint geometricZ (unit: m):
@@ -486,11 +474,7 @@ subroutine changevar(self, geom, xm, xg)
 
 !! begin surface variables
         case ( var_sfc_z ) !-surface_geopotential_height
-          do iCell=1,nCells
-            lat = geom%latCell(iCell) * MPAS_JEDI_RAD2DEG_kr !- to Degrees
-            call geometric2geop(real(lat,kind=kind_real), real(geom%zgrid(1,iCell),kind=kind_real), rz)
-            gdata%r1%array(iCell)=rz
-          enddo
+          gdata%r1%array(1:nCells) = geom%zgrid(1,1:nCells)
 
         case ( var_sfc_geomz ) !-surface_altitude
           gdata%r1%array(1:nCells) = geom%zgrid(1,1:nCells)

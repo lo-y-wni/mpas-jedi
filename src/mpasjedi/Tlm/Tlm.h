@@ -55,6 +55,7 @@ class Tlm: public oops::interface::LinearModelBase<Traits>,
 
 /// Other utilities
   const util::Duration & timeResolution() const override {return tstep_;}
+  const util::Duration & stepTrajectory() const override {return tstep_;}
   const Geometry & resolution() const {return resol_;}
 
  private:
